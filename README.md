@@ -27,11 +27,11 @@ AWS_REGION=us-east-1
 2. Launch browser and go to localhost:3000
 
 ## Usage - Run Client
-
-1. Launch browser and go to localhost:3000/countdown/5 to start a countdown timer of 5 minutes
+1. No client to run yet
 
 # To connect to a device/module (THE THING)
 Plug the USB cable from the device to your machine
+
 1. Run `ls /dev/cu.usb*` to get the usb connection name. For example: `/dev/cu.usbmodem1421`
 2. Copy `usbmodem1421` for the tty command
 3. Run `screen /dev/tty.usbmodem1421 115200`
