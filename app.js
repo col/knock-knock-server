@@ -33,6 +33,27 @@ router.route('/open')
 		response.send('door open event sent');
 	});
 
+router.use(function(request, response, next) {
+  if (request.path === '/login') { // pass requests for login page
+    next();
+  }
+  else 
+  {
+	  if (! request.session || request.session.isLoggedIn !== true) // check logged in status
+	    response.redirect('/login'); // redirect to login page when not logged in
+	  else
+	    next(); // else just pass the request along
+  }
+});
+
+router.get('/login', function(request, response) {
+  response.sendFile(path.join(__dirname + '/views/login.html'));
+});
+
+router.get('/', function(request, response) {
+  response.sendFile(path.join(__dirname + '/views/index.html'));
+});
+
 app.use(router);
 app.use('/', express.static(__dirname + '/public'));
 
