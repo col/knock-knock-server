@@ -1,0 +1,18 @@
+{
+  "name": "knock-knock-server",
+  "version": "1.0.0",
+  "description": "IoT Server for Knock-Knock",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node -r dotenv/config app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-iot-device-sdk": "^1.0.12",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "socket.io": "^1.4.8"
+  }
+}
