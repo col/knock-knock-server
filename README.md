@@ -48,8 +48,8 @@ Plug the USB cable from the device to your machine
 
 ## TO DO/Issues
 1. Implement the authentication
-⋅⋅⋅thoughtworks.okta.com not allowing our domain to use okta login. need to contact okta admin.
-⋅⋅⋅Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://thoughtworks.okta.com/api/v1/authn. (Reason: CORS header 'Access-Control-Allow-Origin' missing).
+	* thoughtworks.okta.com not allowing our domain to use okta login. need to contact okta admin.
+	* Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://thoughtworks.okta.com/api/v1/authn. (Reason: CORS header 'Access-Control-Allow-Origin' missing).
 2. Integrate okta authentication with app authorization
 3. Host it somewhere, maybe elastic beanstalk?
 4. move certs to CI
