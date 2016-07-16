@@ -38,3 +38,19 @@ Plug the USB cable from the device to your machine
 4. Login with `chip/chip` for CHIP, `root/intel-edison` for EDISON
 5. Viola, you can see the console of the device.
 6. To start the chip, `cd [device-name]` (for example `cello-game`), `sudo node index.js`
+
+
+# Project Progress
+## DONE
+1. Okta sign-in widget added to login page
+2. Button to send open event to AWS mqtt
+
+
+## TO DO/Issues
+1. Implement the authentication
+...thoughtworks.okta.com not allowing our domain to use okta login. need to contact okta admin.
+...Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://thoughtworks.okta.com/api/v1/authn. (Reason: CORS header 'Access-Control-Allow-Origin' missing).
+2. Integrate okta authentication with app authorization
+3. Host it somewhere, maybe elastic beanstalk?
+4. move certs to CI
+5. Maybe someone can make it look nicer :)
