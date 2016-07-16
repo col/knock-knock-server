@@ -1,24 +1,33 @@
 <!doctype html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Knock Knock</title>
   <meta name="description" content="TWSG: Knock and the door shall open">
-  <link rel="stylesheet" href="/public/css/style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
 </head>
  
 <body>
     <div id="wrapper">
         <header>
-            <h1>Look Ma, no hands! The door just opened</h1>
+            <h1>Look Ma, no hands!</h1>
         </header>
          
         <div>
-            <p>WIP: Imagine the buttons are here.</p>
+            <form>
+            <p><button type="button" class="button" id="mainDoorBtn">Open the main door</button></p>
         </div>
          
         <footer>
             <p>©ThoughtWorks Singapore Makers</p>
         </footer>
     </div>
+    <script type="text/javascript">
+      $('#mainDoorBtn').click(function() {
+        $.post("/open");
+      });
+    </script>
 </body>
 </html>

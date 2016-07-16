@@ -1,0 +1,50 @@
+body {
+	width: 500px;
+	margin: 0 auto;
+	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-align: center;
+	color: #5e5e5e;
+}
+
+h1 {
+	font-size: 1.5rem;
+}
+
+.button {
+	width: 70%;
+  	height: 3em;
+	color: #fff;
+	font-weight: bold;
+	font-size: 1rem;
+
+	background: #007dc1;
+	background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #007dc1), color-stop(100%, #0073b2)), #007dc1;
+	background: -moz-linear-gradient(#007dc1, #0073b2), #007dc1;
+	background: -webkit-linear-gradient(#007dc1, #0073b2), #007dc1;
+	background: linear-gradient(#007dc1, #0073b2), #007dc1;
+	
+	border-radius: 0.6em; 
+	-moz-border-radius: 8px; 
+	-webkit-border-radius: 8px; 
+	border: 1px solid #800000;
+}
+
+.button:hover, .button:focus, .button:active, .button:focus {
+  box-shadow: none;
+  filter: opacity(90%);
+  cursor: pointer;
+}
+
+#okta-sign-in h2,
+#okta-sign-in h3 {
+  font-weight: bold;
+  color: #5e5e5e;
+}
+
+footer p{
+	margin-top: 1em;
+	font-weight: bold;
+	text-align: center;
+}

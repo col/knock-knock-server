@@ -1,8 +1,8 @@
 var express = require('express');
+var cors = require('cors');
 var app = express();
 var path = require("path");
 var server = require('http').createServer(app);
-var io = require('socket.io')(server);
 
 var hostname = 'localhost';
 var port = process.env.PORT || 3000;
@@ -25,26 +25,27 @@ device.on('connect', function(){
 });
 
 router.route('/open')
-	.post(function (request, response) {
-		device.publish('door', JSON.stringify({
-			event: 'open'
-		}));
+.post(function (request, response) {
+	device.publish('door', JSON.stringify({
+		event: 'open'
+	}));
 
-		response.send('door open event sent');
-	});
-
-router.use(function(request, response, next) {
-  if (request.path === '/login') { // pass requests for login page
-    next();
-  }
-  else 
-  {
-	  if (! request.session || request.session.isLoggedIn !== true) // check logged in status
-	    response.redirect('/login'); // redirect to login page when not logged in
-	  else
-	    next(); // else just pass the request along
-  }
+	console.log('{event: open} sent');
+	response.sendStatus(200);
 });
+
+// router.use(function(request, response, next) {
+//   if (request.path === '/login') { // pass requests for login page
+//     next();
+//   }
+//   else 
+//   {
+// 	  if (! request.session || request.session.isLoggedIn !== true)
+// 	    response.redirect('/login'); // redirect to login page when not logged in
+// 	  else
+// 	    next(); // else just pass the request along
+//   }
+// });
 
 router.get('/login', function(request, response) {
   response.sendFile(path.join(__dirname + '/views/login.html'));
@@ -54,9 +55,10 @@ router.get('/', function(request, response) {
   response.sendFile(path.join(__dirname + '/views/index.html'));
 });
 
+app.use(cors({origin: 'thoughtworks.okta.com', credentials: true }));
+app.use(express.static(path.join(__dirname + '/public')));
 app.use(router);
-app.use('/', express.static(__dirname + '/public'));
 
 server.listen(port, hostname, function(){
-	console.log(`Server running at http://${hostname}:${port}/`);
+	console.log('Server running at http://${hostname}:${port}/');
 });
