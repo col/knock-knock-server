@@ -1,8 +1,8 @@
 var express = require('express');
-var cors = require('cors');
 var app = express();
 var path = require("path");
 var server = require('http').createServer(app);
+var passport = require('./auth');
 
 var hostname = 'localhost';
 var port = process.env.PORT || 3000;
@@ -24,8 +24,20 @@ device.on('connect', function(){
 	device.subscribe('door');
 });
 
+app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({ extended: false }));
+app.use(require('express-session')({
+    secret: "knockknockawesome",
+    resave: true,
+    saveUninitialized: true,
+    proxy: true,
+    cookie: { secure: false }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 router.route('/open')
-.post(function (request, response) {
+.post(passport.protected, function (request, response) {
 	device.publish('door', JSON.stringify({
 		event: 'open'
 	}));
@@ -34,28 +46,29 @@ router.route('/open')
 	response.sendStatus(200);
 });
 
-// router.use(function(request, response, next) {
-//   if (request.path === '/login') { // pass requests for login page
-//     next();
-//   }
-//   else 
-//   {
-// 	  if (! request.session || request.session.isLoggedIn !== true)
-// 	    response.redirect('/login'); // redirect to login page when not logged in
-// 	  else
-// 	    next(); // else just pass the request along
-//   }
-// });
-
 router.get('/login', function(request, response) {
-  response.sendFile(path.join(__dirname + '/views/login.html'));
+  response.redirect(process.env.OKTA_SSO);
 });
 
-router.get('/', function(request, response) {
+router.get('/login/error', function(request, response) {
+  response.send("Login error");
+});
+
+router.get('/', passport.protected, function(request, response) {
   response.sendFile(path.join(__dirname + '/views/index.html'));
 });
 
-app.use(cors({origin: 'thoughtworks.okta.com', credentials: true }));
+router.post('/loginResult', function(request, response) {
+  passport.authenticate('saml', {
+        successRedirect: '/',
+        failureRedirect: '/login/error',
+        failureFlash: true
+    })(request, response, function (error) {
+        console.log(error.stack);
+        response.send(error.message, 500);
+    });
+});
+
 app.use(express.static(path.join(__dirname + '/public')));
 app.use(router);
 
