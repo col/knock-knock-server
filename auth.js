@@ -3,12 +3,11 @@ var SamlStrategy = require('passport-saml').Strategy;
 
 passport.serializeUser(function(user, next) {
   console.log("*** user = " + JSON.stringify(user, null, 4));
-  //limit to people from singapore office only
+  //TODO: limit to people from singapore office only
   next(null, user.nameID);
 });
 
 passport.deserializeUser(function(id, next) {
-	console.log("been here");
 	if (!id) {
 		return next(new Error("User is not authenticated"), null);
 	}

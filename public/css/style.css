@@ -8,10 +8,6 @@ body {
 	color: #5e5e5e;
 }
 
-h1 {
-	font-size: 1.5rem;
-}
-
 .button {
 	width: 70%;
   	height: 3em;
@@ -28,23 +24,23 @@ h1 {
 	border-radius: 0.6em; 
 	-moz-border-radius: 8px; 
 	-webkit-border-radius: 8px; 
+	
 	border: 1px solid #800000;
 }
 
-.button:hover, .button:focus, .button:active, .button:focus {
+.button:hover, .button:focus, .button:active {
   box-shadow: none;
-  filter: opacity(90%);
+  opacity: 0.9;
   cursor: pointer;
-}
-
-#okta-sign-in h2,
-#okta-sign-in h3 {
-  font-weight: bold;
-  color: #5e5e5e;
 }
 
 footer p{
 	margin-top: 1em;
 	font-weight: bold;
 	text-align: center;
+}
+
+.headerImg {
+	margin: 5px 0;
+	width: 88px; /*Because it's Singapore, HUAT ARRR*/
 }

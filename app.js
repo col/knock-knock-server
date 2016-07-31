@@ -65,7 +65,7 @@ router.post('/loginResult', function(request, response) {
         failureFlash: true
     })(request, response, function (error) {
         console.log(error.stack);
-        response.send(error.message, 500);
+        response.status(500).send(error.message);
     });
 });
 
