@@ -1,5 +1,6 @@
 var passport = require('passport');
 var SamlStrategy = require('passport-saml').Strategy;
+var moment = require('moment')
 
 passport.serializeUser(function(user, next) {
   console.log("*** user = " + JSON.stringify(user, null, 4));
@@ -22,6 +23,11 @@ passport.use(new SamlStrategy(
   },
   function(profile, next) {
     console.log("*** profile = " + JSON.stringify(profile, null, 4));
+    
+    if(!validWorkingHours()) {
+      return next(new Error("Sorry, Dr.Door is entitled to a 5-day work week. Hurray work-life balance!"), null)
+    }
+
     if (!profile.nameID) {
       return next(new Error("No nameID found"), null);
     }
@@ -38,5 +44,16 @@ passport.protected = function protected(req, res, next) {
   }
   res.redirect('/login');
 };
+
+function validWorkingHours() {
+  var date = moment();
+  var day = date.day();
+  var hour = date.hour();
+
+  if(day == 6 || day == 0 || hour >= 19 || hour <= 8 ) {
+    return false;
+  }
+  return true;
+}
 
 module.exports = passport;
