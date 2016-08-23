@@ -4,7 +4,7 @@ var path = require("path");
 var server = require('http').createServer(app);
 var passport = require('./auth');
 
-var hostname = 'localhost';
+var hostname = process.env.HOST || 'localhost';
 var port = process.env.PORT || 3000;
 
 var router = express.Router();

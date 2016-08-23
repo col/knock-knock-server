@@ -23,7 +23,7 @@ passport.use(new SamlStrategy(
   },
   function(profile, next) {
     console.log("*** profile = " + JSON.stringify(profile, null, 4));
-    
+
     if(!validWorkingHours()) {
       return next(new Error("Sorry, Dr.Door is entitled to a 5-day work week. Hurray work-life balance!"), null)
     }
