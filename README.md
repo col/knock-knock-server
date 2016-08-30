@@ -39,6 +39,11 @@ Plug the USB cable from the device to your machine
 5. Viola, you can see the console of the device.
 6. To start the chip, `cd [device-name]` (for example `cello-game`), `sudo node index.js`
 
+## Deploy to Elastic Beanstalk
+
+1. Make sure Node command to `npm start`, in Elastic Beanstalk Console -> Configuration -> Software. See http://stackoverflow.com/a/30743344
+2. Zip the **CONTENTS** of the project, not the project folder itself. Otherwise, you will see an error `ENOENT: no such file or directory, open '/var/app/current/package.json'`. See https://forums.aws.amazon.com/thread.jspa?messageID=476022
+3. Upload the zip file to Elastic Beanstalk Console
 
 # Project Progress
 ## DONE
