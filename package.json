@@ -2,10 +2,10 @@
   "name": "knock-knock-server",
   "version": "1.0.0",
   "description": "IoT Server for Knock-Knock",
-  "main": "app.js",
+  "main": "web.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node -r dotenv/config app.js"
+    "start": "node -r dotenv/config web.js"
   },
   "author": "",
   "license": "ISC",
