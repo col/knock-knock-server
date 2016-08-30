@@ -4,9 +4,6 @@ var path = require("path");
 var server = require('http').createServer(app);
 var passport = require('./auth');
 
-var hostname = process.env.HOST || 'localhost';
-var port = process.env.PORT || 3000;
-
 var router = express.Router();
 
 var awsIot = require('aws-iot-device-sdk');
@@ -72,6 +69,4 @@ router.post('/loginResult', function(request, response) {
 app.use(express.static(path.join(__dirname + '/public')));
 app.use(router);
 
-server.listen(port, hostname, function(){
-	console.log(`Server running at http://${hostname}:${port}/`);
-});
+server.listen(process.env.PORT || 3000);
