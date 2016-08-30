@@ -3,7 +3,7 @@
 ## Installation
 
 1. npm install
-2. create a .env file in the root of the project.  It should contain the following:
+2. create a .env file in the root of the project. It should contain the following:
 
 ```
 AWS_IOT_KEY_PATH=[path to your key file]
@@ -14,12 +14,14 @@ AWS_REGION=[your AWS region]
 ```
 for example:
 ```
-AWS_IOT_KEY_PATH=/users/me/.symphony/private.pem.key
-AWS_IOT_CERT_PATH=/users/me/.symphony/certificate.pem.crt
-AWS_IOT_CA_PATH=/users/me/.symphony/root-CA.pem
+AWS_IOT_KEY_PATH=certs/private.pem.key
+AWS_IOT_CERT_PATH=certs/certificate.pem.crt
+AWS_IOT_CA_PATH=certs/root-CA.pem
 AWS_IOT_CLIENT_ID=symphony-mac
 AWS_REGION=us-east-1
 ```
+
+Note: it's not recommended to put `AWS_IOT_KEY_PATH`, `AWS_IOT_CERT_PATH`, and `AWS_IOT_CA_PATH` outside the project directory. Because it's easier to zip the contents of the project and ONLY upload that zip to Elastic Beanstalk. You should put them in `./certs`, which is already added in `.gitignore`.
 
 ## Usage - Run Server
 
@@ -28,6 +30,12 @@ AWS_REGION=us-east-1
 
 ## Usage - Run Client
 1. No client to run yet
+
+## Deploy to Elastic Beanstalk
+
+1. Make sure Node command to `npm start`, in Elastic Beanstalk Console -> Configuration -> Software. See http://stackoverflow.com/a/30743344
+2. Zip the **CONTENTS** of the project, not the project folder itself. Otherwise, you will see an error `ENOENT: no such file or directory, open '/var/app/current/package.json'`. See https://forums.aws.amazon.com/thread.jspa?messageID=476022
+3. Upload the zip file to Elastic Beanstalk Console
 
 # To connect to a device/module (THE THING)
 Plug the USB cable from the device to your machine
@@ -38,12 +46,6 @@ Plug the USB cable from the device to your machine
 4. Login with `chip/chip` for CHIP, `root/intel-edison` for EDISON
 5. Viola, you can see the console of the device.
 6. To start the chip, `cd [device-name]` (for example `cello-game`), `sudo node index.js`
-
-## Deploy to Elastic Beanstalk
-
-1. Make sure Node command to `npm start`, in Elastic Beanstalk Console -> Configuration -> Software. See http://stackoverflow.com/a/30743344
-2. Zip the **CONTENTS** of the project, not the project folder itself. Otherwise, you will see an error `ENOENT: no such file or directory, open '/var/app/current/package.json'`. See https://forums.aws.amazon.com/thread.jspa?messageID=476022
-3. Upload the zip file to Elastic Beanstalk Console
 
 # Project Progress
 ## DONE
